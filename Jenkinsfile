@@ -30,19 +30,20 @@ pipeline{
                 }
             }
         }
+        stage('Integration testing'){
+            
+            steps{
+                
+                script{
+                    
+                    sh 'mvn verify -DskipUnitTests'
+                }
+            }
+        }
     }
 }
 
-//         stage('Integration testing'){
-            
-//             steps{
-                
-//                 script{
-                    
-//                     sh 'mvn verify -DskipUnitTests'
-//                 }
-//             }
-//         }
+
 //         stage('Maven build'){
             
 //             steps{

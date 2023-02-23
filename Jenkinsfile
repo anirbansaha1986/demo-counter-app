@@ -36,7 +36,26 @@ pipeline{
                 
                 script{
                     
-                    sh 'mvn verify -DskipUnitTests'
+                    sh '''
+                            export MAVEN_HOME=/opt/maven
+                            export PATH=$PATH:$MAVEN_HOME/bin
+                            mvn --version
+                            mvn verify -DskipUnitTests
+                    '''
+                }
+            }
+        }
+        stage('Maven build'){
+            
+            steps{
+                
+                script{
+                    
+                    sh '''
+                            export MAVEN_HOME=/opt/maven
+                            export PATH=$PATH:$MAVEN_HOME/bin
+                            mvn clean install
+                    '''
                 }
             }
         }
@@ -44,16 +63,7 @@ pipeline{
 }
 
 
-//         stage('Maven build'){
-            
-//             steps{
-                
-//                 script{
-                    
-//                     sh 'mvn clean install'
-//                 }
-//             }
-//         }
+
 //         stage('Static code analysis'){
             
 //             steps{

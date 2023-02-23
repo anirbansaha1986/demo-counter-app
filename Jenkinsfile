@@ -59,25 +59,30 @@ pipeline{
                 }
             }
         }
+        stage('Static code analysis'){
+            
+            steps{
+                
+                script{
+                    
+                    withSonarQubeEnv(credentialsId: 'sonar-api-key') {
+                        
+                        sh '''
+                            export MAVEN_HOME=/opt/maven
+                            export PATH=$PATH:$MAVEN_HOME/bin
+                            mvn clean package sonar:sonar
+                        '''
+                    }
+                }
+                    
+            }
+        }
     }
 }
 
 
 
-//         stage('Static code analysis'){
-            
-//             steps{
-                
-//                 script{
-                    
-//                     withSonarQubeEnv(credentialsId: 'sonar-api') {
-                        
-//                         sh 'mvn clean package sonar:sonar'
-//                     }
-//                    }
-                    
-//                 }
-//             }
+
 //             stage('Quality Gate Status'){
                 
 //                 steps{
